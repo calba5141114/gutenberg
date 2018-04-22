@@ -1,7 +1,30 @@
-const express = require("express");
-const app = express();
+var express = require("express");
+var app = express();
+var server = require("http").createServer(app);
+var io = require('socket.io')(server);
+
+app.get('/', function(req, res, next){
+    res.sendFile(__dirname + '/public/index.html')
+});
+
 app.use(express.static('public'));
 
-app.get("/", (req, res) => res.sendFile(__dirname + "/public/index.html"));
+io.on('connection', function(client) {
+    console.log('Client is connected');
+    
 
-app.listen(3000, () => console.log("Example app listening on port 3000!"));
+    client.on('join', function(data) {
+        console.log(data)
+    });
+
+    client.on('messages', function(data){
+        client.emit('user1List', data);
+        client.broadcast.emit('user1List', data);
+    });
+
+
+});
+
+
+
+server.listen(3000);

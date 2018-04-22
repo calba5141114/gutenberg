@@ -24,30 +24,17 @@
     <br>
     <div class="container row w-75 mx-auto">
 <div class="col w-25">
-     <ul id="user1List">
-
-     </ul>
         <form>
                 <div class="form-group">
                   <textarea class="form-control" id="user1message" rows="2"></textarea>
                   <br>
                   <button class="btn btn-dark float-right" id="sendUser1">Send</button>
+                  <div class="divider"/>
+                  <button class="btn btn-dark float-right" id="switch" onclick="user('spanish')">Language</button>
                 </div>
 
               </form>
-</div>
-<div class="col w-25">
-        <ul id="user12List">
-
-            </ul>
-               <form>
-                       <div class="form-group">
-                         <textarea class="form-control" id="user2message" rows="2"></textarea>
-                         <br>
-                         <button class="btn btn-dark float-right" id="sendUser2">Send</button>
-                       </div>
-       
-                     </form>
+        <ul id="user1List"></ul>
 </div>
     </div>
                              
@@ -58,8 +45,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-        <script src="./src/main.js"></script>
+        crossorigin="anonymous"></script> 
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="/src/client.js"></script> 
 </body>
 
 </html>
