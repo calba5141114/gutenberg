@@ -1,0 +1,23 @@
+{
+  "name": "gutenberg",
+  "version": "1.0.0",
+  "description": "A backend for Gutenberg",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calba5141114/gutenberg.git"
+  },
+  "keywords": [
+    "gutenberg"
+  ],
+  "author": "Carlos Alba and Minwoo Park",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/calba5141114/gutenberg/issues"
+  },
+  "homepage": "https://github.com/calba5141114/gutenberg#readme"
+}
