@@ -1,19 +1,28 @@
-const translate = require('google-translate-api');
+const translate = require("google-translate-api");
 
-function convert(data) {
-   translate(data, {from: 'en', to: 'es'}).then(res => {
-       data = res.text;
-       console.log(data);
-   }).catch(err => {
-        console.error(err);
-   });
+class Message {
+  constructor(content, origin, target) {
+    this.content = content;
+    this.origin = origin;
+    this.target = target;
+  }
 }
 
-function reconvert(data) {
-    translate(data, {from: 'es', to: 'en'}).then(res => {
-       data = res.text;
-    }).catch(err => {
-         console.error(err);
+function convert(blob, callback) {
+  translate(blob.content, { from: `${blob.origin}`, to: `${blob.target}` })
+    .then(res => {
+      blob.content = res.text;
+      callback(blob.content);
+    })
+    .catch(err => {
+      console.error(err);
     });
+  return blob;
 }
 
+// chad = new Message("Hello", "en", "es");
+
+// convert(chad, res => {
+//   console.log("returned " + res);
+//   console.log(chad);
+// });

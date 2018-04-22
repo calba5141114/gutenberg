@@ -1,65 +1,35 @@
-
-
-var socket = io.connect('http://localhost:3000');
-socket.on('connect', function(data){
-    socket.emit('join', 'Hello server from client')
-});
-
-socket.on('user1List', function(data){
-    $('#user1List').append('<li>' + data + '</li>');
-});
-
-var choose;
-var language;
-function user(choice){
-    choose = choice;
-    if(choose = "spanish"){
-        language = true;
-        console.log(language)
-    }
+class Message {
+  constructor(content, origin, target) {
+    this.content = content;
+    this.origin = origin;
+    this.target = target;
+  }
 }
 
+
 function sendData(data) {
-    var XHR = new XMLHttpRequest();
-    
-    encodeURIComponent(data);
-    
-    // Define what happens on successful data submission
-    XHR.addEventListener('load', function(event) {
-      alert('Yeah! Data sent and response loaded.');
-    });
-  
-    // Define what happens in case of error
-    XHR.addEventListener('error', function(event) {
-      alert('Oops! Something goes wrong.');
-    });
-  
-    // Set up our request
-    XHR.open('POST', 'https://localhost:3000/post_translate');
-  
-    // Add the required HTTP header for form data POST requests
-    XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  
-    // Finally, send our data.
-    XHR.send(data);
-  }
+  var text = `
+    "content":"${data.content}" ,
+    "origin" : "${data.origin},
+    "target" : "${data.target}"
+    `;
 
-
-
-
-
-
-
-$('form').submit(function() {
-    var message = $('#user1message').val();
-    
-    if(language){
-        convertToSpanish(message);
-        sendData(message);
+    xhr = new XMLHttpRequest();
+    var url = "https://localhost:3000/post_translate";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () { 
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var json = JSON.parse(xhr.responseText);
+            console.log(json);
+        }
     }
-    socket.emit('messages', message);
-    this.reset();
-    return false;
-});
+
+    xhr.send(text);
 
 
+}
+
+var Message1 = new Message('hello', 'en', 'es');
+
+sendData(Message1);
